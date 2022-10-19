@@ -16,10 +16,17 @@ exports.prepare = function () {
 
 exports.getCPA = function () {
   return new Promise(function (resolve, reject) {
-    if (students.length == 0) {
-      reject("no results returned");
+    var cpaStudents = [];
+    for (let i = 0; i < students.length; i++) {
+      if (students[i].program == "CPA") {
+        cpaStudents.push(students[i]);
+      }
     }
-    resolve(students);
+    if (cpaStudents.length > 0) {
+      resolve(cpaStudents);
+    } else {
+      reject("Failed to find any CPA students");
+    }
   });
 };
 
